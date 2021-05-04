@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './App.css';
-import Home from './components/Home';
-import Signin from './components/Signin';
+import Admin from './pages/Admin';
+import Home from './pages/Home';
+import Signin from './pages/Signin';
 
 
 function App() {
@@ -15,6 +16,9 @@ function App() {
           </Route>
           <Route exact path="/SignIn">
             <Signin />
+          </Route>
+          <Route exact path="/Admin">
+            <Admin />
           </Route>
         </Switch>
       </Router>
