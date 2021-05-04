@@ -1,7 +1,33 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import { useAuth } from "../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
+import { Alert } from "react-bootstrap";
 import styled from 'styled-components';
 
 function Signin() {
+
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const { login } = useAuth();
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+    const history = useHistory();
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+        try {
+            setError("");
+            setLoading(true);
+            await login(emailRef.current.value, passwordRef.current.value);
+            history.push("/Admin");
+        } catch {
+            setError("Login Failed! Your Email or Password is incorrect.");
+        }
+
+        setLoading(false);
+    }
+
     return (
         <Container>
             <Content>
@@ -11,18 +37,19 @@ function Signin() {
                         <h2>Welcome back</h2>
                         <h4>Log in to your account using email and password.</h4>
                     </FormHeader>
+
+                    {error && <Alert variant="danger" className="w-100">{error}</Alert>}
                     
-                    <FormContainer>
-                        <input type="email" class="email-field" placeholder="Email Address" />
-                        <input type="password" class="password-field" placeholder="Password" />
-                        <button class="login-button">LOGIN</button>
+                    <FormContainer onSubmit={handleSubmit}>
+                        <input type="email" class="email-field" placeholder="Email Address" ref={emailRef} required />
+                        <input type="password" class="password-field" placeholder="Password" ref={passwordRef} required />
+                        <button disabled={loading} class="login-button" type="submit">LOGIN</button>
                     </FormContainer>
                 </SignInForm>
             </Content>
         </Container>
     )
 }
-
 
 const Container = styled.section`
     overflow: hidden;
@@ -53,6 +80,10 @@ const SignInForm = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+
+    .alert{
+        letter-spacing: 1.5px;
+    }
 `;
 
 const SideImage = styled.img`
