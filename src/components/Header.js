@@ -27,7 +27,6 @@ function Header() {
                 <Nav className="ml-auto">
                     <DropdownNav title={navDropdownIcon} id="basic-nav-dropdown">
                         <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <Button variant="link" onClick={handleLogout} className="w-100 text-center">
                             Logout

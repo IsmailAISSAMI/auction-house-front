@@ -5,6 +5,8 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Admin from './pages/Admin';
 import Home from './pages/Home';
 import Signin from './pages/Signin';
+import Products from './pages/Products';
+
 // CSS
 import './App.css';
 
@@ -23,6 +25,9 @@ function App() {
             </Route>
             <Route exact path="/Admin">
               <Admin />
+            </Route>
+            <Route exact path="/Products">
+              <Products />
             </Route>
           </Switch>
         </AuthProvider>
