@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import SideNav from "../components/SideNav";
-import Header from "../components/Header";
 
 function Products() {
     const [products, setProducts] = useState([]);
@@ -18,19 +18,31 @@ function Products() {
         getProducts();
     });
 
+    const deleteProduct = (id) => {
+        axios.delete(`http://localhost:3030/api/v1/products/${id}`)
+        .then(()=>{
+            console.log('The product with the ID ', id, ' was deleted!');
+        })
+        .catch((err)=>{
+            console.log('ERROR while deleting the product with the ID ', id);
+            console.log(err);
+        })
+        
+    }
+
     return (
         <Container>
-            <Header />
             <Content>
                 <SideNav />
                 <Dashboard>
                     <Table striped bordered hover size="sm">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th>Product</th>
                                 <th>Title</th>
                                 <th>Price</th>
                                 <th>Type</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,6 +52,13 @@ function Products() {
                                 <td>{product.title}</td>
                                 <td>{product.price} €</td>
                                 <td>{product.type}</td>
+                                <td>
+                                    <Link to={{
+                                        pathname: `/Products/${product.id}`
+                                    }} className="btn btn-primary">View</Link>
+                                    <Button variant="success" className="mx-1">Update</Button>
+                                    <Button variant="danger" className="mx-1" onClick={() => deleteProduct(product.id)}>Delete</Button>
+                                </td>
                             </tr>
                             
                         ))}
@@ -88,7 +107,7 @@ const Dashboard= styled.div`
 
 const ProductImg= styled.img`
     height: 120px;
-    width: 100px;  
+    width: 120px;  
 `;
 
 export default Products

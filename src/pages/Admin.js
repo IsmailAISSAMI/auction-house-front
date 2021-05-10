@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from "styled-components";
+//COMPONENTS
 import SideNav from "../components/SideNav";
-import Header from "../components/Header";
+// import Header from "../components/Header";
 
 function Admin() {
 
   return (
     <Container>
-      <Header />
+      {/* <Header /> */}
       <Content>
         <SideNav />
         <Dashboard>

@@ -41,9 +41,9 @@ function Signin() {
                     {error && <Alert variant="danger" className="w-100">{error}</Alert>}
                     
                     <FormContainer onSubmit={handleSubmit}>
-                        <input type="email" class="email-field" placeholder="Email Address" ref={emailRef} required />
-                        <input type="password" class="password-field" placeholder="Password" ref={passwordRef} required />
-                        <button disabled={loading} class="login-button" type="submit">LOGIN</button>
+                        <input type="email" className="email-field" placeholder="Email Address" ref={emailRef} required />
+                        <input type="password" className="password-field" placeholder="Password" ref={passwordRef} required />
+                        <button disabled={loading} className="login-button" type="submit">LOGIN</button>
                     </FormContainer>
                 </SignInForm>
             </Content>
